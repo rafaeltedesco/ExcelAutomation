@@ -5,8 +5,6 @@ import pythoncom
 from datetime import datetime
 import os
 
-import os
-
 threads = []
 cpus = os.cpu_count()
 
