@@ -5,9 +5,6 @@ from typing import List, Tuple
 from datetime import datetime
 from string import ascii_uppercase
 
-# CTRL + SHIFT + P - Select Interpreter
-
-
 COLOR_RED = (255, 0, 0,)
 COLOR_WHITE = (255, 255, 255, )
 COLOR_BLACK = (0, 0, 0, )

@@ -10,7 +10,7 @@ cpus = os.cpu_count()
 
 def record_xlsx():
   pythoncom.CoInitialize()
-  with xw.App(visible=True) as xl:
+  with xw.App(visible=False) as xl:
     workbooks = xl.books
     current_wb = workbooks[0]
     sheets = current_wb.sheets
