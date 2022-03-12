@@ -6,14 +6,6 @@ from string import ascii_uppercase
 # CTRL + SHIFT + P - Select Interpreter
 
 
-xl = xw.App(visible=True)
-workbooks = xl.books
-
-current_wb = workbooks[0]
-
-sheets = current_wb.sheets
-current_sheet = sheets[0]
-
 COLOR_RED = (255, 0, 0,)
 COLOR_WHITE = (255, 255, 255, )
 COLOR_BLACK = (0, 0, 0, )
@@ -29,31 +21,37 @@ def format_header(cells: List[str], values: List[str],
     current_sheet[info[0]].color = background_color
     current_sheet[info[0]].font.color = foreground_color
 
-
-columns = ["A1", "B1", "C1"]
-values = ["Data", "Descrição", "Valor"]
-format_header(columns, values)
-
-
 def fill_row(description: str, budget: float, row: int):
-  values = list([datetime.now(), description, budget])
-  for column in range(len(columns)):
-    col = ascii_uppercase[column]
-    current_sheet[f'{col}{row}'].value = values[column]
-  if budget < 0:
-    current_sheet[f"C{row}"].font.color = COLOR_RED
+    values = list([datetime.now(), description, budget])
+    for column in range(len(columns)):
+      col = ascii_uppercase[column]
+      current_sheet[f'{col}{row}'].value = values[column]
+    if budget < 0:
+      current_sheet[f"C{row}"].font.color = COLOR_RED
 
 
-rows_values = [
-  ("Compra de carne para o churrasco", -150),
-  ("Bonificação hora extra", 70),
-  ("Gratificação de aniversário", 10),
-  ("Compra de barra de chocolate", -7.5)
-]
+with xw.App(visible=False) as xl:
+  workbooks = xl.books
 
-for idx, value in enumerate(rows_values):
-  fill_row(*value, idx + 2)
+  current_wb = workbooks[0]
 
+  sheets = current_wb.sheets
+  current_sheet = sheets[0]
 
-xl.quit()
-xl.kill()
+  columns = ["A1", "B1", "C1"]
+  values = ["Data", "Descrição", "Valor"]
+  format_header(columns, values)
+
+  rows_values = [
+    ("Compra de carne para o churrasco", -150),
+    ("Bonificação hora extra", 70),
+    ("Gratificação de aniversário", 10),
+    ("Compra de barra de chocolate", -7.5)
+  ]
+
+  for idx, value in enumerate(rows_values):
+    fill_row(*value, idx + 2)
+
+  current_wb.save('caixa.xlsx')
+
+  
