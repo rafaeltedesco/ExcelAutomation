@@ -1,5 +1,7 @@
-from typing import List, Tuple
+import os
 import xlwings as xw
+
+from typing import List, Tuple
 from datetime import datetime
 from string import ascii_uppercase
 
@@ -52,6 +54,6 @@ with xw.App(visible=False) as xl:
   for idx, value in enumerate(rows_values):
     fill_row(*value, idx + 2)
 
-  current_wb.save('caixa.xlsx')
+  current_wb.save(os.path.join('xlsx', 'caixa.xlsx'))
 
   
